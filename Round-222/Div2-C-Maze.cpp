@@ -28,29 +28,49 @@ typedef pair<int,PI> PPI ;
 #define NINF INT_MIN
 #define ison(x, i) (((x)>>(i))&1)
 #define syn (ios::sync_with_stdio(false))
-int const MAXN=500010;
-char s[MAXN];
-int i,j,n,k,A,d;
-int main(){
-	scanf("%d%d%s",&n,&k,s);
-	if(k==2){
-		for(i=0;i<n;i++)
-			if(s[i]=='A'+(i&1))d++;
-		A=n-d<d?n-d:d;
-		for(i=0;i<n;i++)
-			s[i]='A'+(((d==A)+i)&1);
+int const MAXN=501;
+char g[MAXN][MAXN];
+int dx[]={-1,1,0,0};
+int dy[]={0,0,1,-1};
+
+int n,m;
+void dfs(int i,int j,int *k){
+	if((*k)<=0)return;
+	g[i][j]='&';
+	REP(u,4)if(i+dx[u]>=0&&i+dx[u]<n&&j+dy[u]>=0&&j+dy[u]<m&&g[i+dx[u]][j+dy[u]]=='.')
+		{
+			(*k)--;
+			dfs(i+dx[u],j+dy[u],k);
+
 	}
-	else
-		for(i=0;i<n;i++)
-			if(s[i]==s[i+1])
-			{
-				A++;
-				char c='A';
-				while(c==s[i]||c==s[i+2])
-					c++;
-				s[i+1]=c;
-			}
-	printf("%d\n%s",A,s);
+
+
+}
+
+int main() {
+    syn;
+    int k;
+    cin >> n >> m>>k;
+    int count=0;
+    REP(i,n)REP(j,m){cin >> g[i][j];count+=(g[i][j]=='.'?1:0);}
+    int flag=0;
+    REP(i,n){REP(j,m)if(g[i][j]=='.'){
+	    
+	    k=count-k;
+	    dfs(i,j,&k);
+	    flag=1;
+	    break;
+    }
+    if(flag)break;}
+    REP(i,n){
+	    REP(j,m){
+		    if(g[i][j]=='&')cout <<'.';
+		    else if(g[i][j]=='.')cout << 'X';
+		    else cout << '#';
+	    }
+	    cout<<'\n';
+    }
+    return 0;
 }
 
 

@@ -28,29 +28,29 @@ typedef pair<int,PI> PPI ;
 #define NINF INT_MIN
 #define ison(x, i) (((x)>>(i))&1)
 #define syn (ios::sync_with_stdio(false))
-int const MAXN=500010;
-char s[MAXN];
-int i,j,n,k,A,d;
-int main(){
-	scanf("%d%d%s",&n,&k,s);
-	if(k==2){
-		for(i=0;i<n;i++)
-			if(s[i]=='A'+(i&1))d++;
-		A=n-d<d?n-d:d;
-		for(i=0;i<n;i++)
-			s[i]='A'+(((d==A)+i)&1);
-	}
-	else
-		for(i=0;i<n;i++)
-			if(s[i]==s[i+1])
-			{
-				A++;
-				char c='A';
-				while(c==s[i]||c==s[i+2])
-					c++;
-				s[i+1]=c;
-			}
-	printf("%d\n%s",A,s);
+int const MAXN=1501;
+
+int main() {
+    syn;
+    int n,m,k,k2;
+    cin >> n >> m >>k;
+    k2=k;
+    int dir=0,i=1,j=1,p=0;
+    while(i>=1&&i<=n&&j>=1&&j<=m){
+	     
+	     if(k>1&&(p==0)){cout<<2<<" ";}
+	    if(k==1&&p==0)cout <<(m*n-(k2-1)*2)<<" ";
+	    cout <<i<<" "<<j<<" ";
+	    if(j==m&!dir){dir=1;i++;}
+	    else if(j==1&&dir){dir=0;i++;}
+	    else if(dir)j--;
+	    else if(!dir)j++;
+	    p++;
+	    if(k>1&&(p==2)){p=0;k--;cout <<'\n'; }
+	   
+    }
+
+    return 0;
 }
 
 

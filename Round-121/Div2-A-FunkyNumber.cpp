@@ -1,6 +1,7 @@
 // @author- razor123
 #include<iostream>
 #include<cstdlib>
+#include<unordered_map>
 #include<cstdio>
 #include<vector>
 #include<cmath>
@@ -28,29 +29,22 @@ typedef pair<int,PI> PPI ;
 #define NINF INT_MIN
 #define ison(x, i) (((x)>>(i))&1)
 #define syn (ios::sync_with_stdio(false))
-int const MAXN=500010;
-char s[MAXN];
-int i,j,n,k,A,d;
-int main(){
-	scanf("%d%d%s",&n,&k,s);
-	if(k==2){
-		for(i=0;i<n;i++)
-			if(s[i]=='A'+(i&1))d++;
-		A=n-d<d?n-d:d;
-		for(i=0;i<n;i++)
-			s[i]='A'+(((d==A)+i)&1);
-	}
-	else
-		for(i=0;i<n;i++)
-			if(s[i]==s[i+1])
-			{
-				A++;
-				char c='A';
-				while(c==s[i]||c==s[i+2])
-					c++;
-				s[i+1]=c;
-			}
-	printf("%d\n%s",A,s);
+int const MAXN=1501;
+ULL a[100001];
+int main() {
+    syn;
+    int n;
+    cin >> n;
+    int i=1;a[i-1]=0;
+    while(a[i-1]<n){
+	    a[i]=a[i-1]+i;
+	    i++;
+    }
+    for(int j=1;a[j]<n&&j<=i;j++){
+	    if(binary_search(a+1,a+i,n-a[j])){cout <<"YES";return 0;
+    
+	}}
+    cout << "NO";
+    return 0;
 }
-
 

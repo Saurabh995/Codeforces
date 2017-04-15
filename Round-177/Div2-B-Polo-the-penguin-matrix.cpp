@@ -28,29 +28,34 @@ typedef pair<int,PI> PPI ;
 #define NINF INT_MIN
 #define ison(x, i) (((x)>>(i))&1)
 #define syn (ios::sync_with_stdio(false))
-int const MAXN=500010;
-char s[MAXN];
-int i,j,n,k,A,d;
-int main(){
-	scanf("%d%d%s",&n,&k,s);
-	if(k==2){
-		for(i=0;i<n;i++)
-			if(s[i]=='A'+(i&1))d++;
-		A=n-d<d?n-d:d;
-		for(i=0;i<n;i++)
-			s[i]='A'+(((d==A)+i)&1);
-	}
-	else
-		for(i=0;i<n;i++)
-			if(s[i]==s[i+1])
-			{
-				A++;
-				char c='A';
-				while(c==s[i]||c==s[i+2])
-					c++;
-				s[i+1]=c;
-			}
-	printf("%d\n%s",A,s);
+int const MAXN=1501;
+int a[101*101];
+int main() {
+    syn;
+    int n,m,d;
+    cin >>n >> m >>d;
+    int f=-1;
+    REP(i,m*n){
+	    cin >> a[i];
+	    if(f==-1)f=a[i]%d;
+	    else {
+		    if(f!=a[i]%d){
+			    f=-1;
+			    break;
+		    }
+	    }
+    }
+    if(f==-1)cout <<-1;
+    else{
+	    int ans=0;
+	    sort(a,a+(m*n));
+	    REP(i,m*n){
+		    ans+=abs(a[i]-a[m*n/2])/d;
+	    } 
+	    cout << ans;
+    }
+    
+    return 0;
 }
 
 
